@@ -73,7 +73,7 @@ pip install -r requirements.txt
 
 If using `uv`:
 ```zsh
-uv pip install -r requirements.txt
+uv sync
 ```
 
 ### 3. Set Environment Variables
@@ -113,7 +113,7 @@ db.save_local("vectorstore/db_faiss")
 ## 💬 Running the CLI Version
 ```zsh
 source .venv/bin/activate
-export HF_TOKEN=hf_...  # if not in .env
+export HF_TOKEN=...  # if not in .env
 python connect_memory_with_llm.py
 ```
 Enter a query at the prompt: `How is hypertension managed?`
