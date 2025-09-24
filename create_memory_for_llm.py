@@ -18,7 +18,6 @@ def load_pdf_files(data):
     documents=loader.load()
     return documents
 
-
 documents=load_pdf_files(data=DATA_PATH)
 #print("Length of PDF pages: ", len(documents))
 
@@ -45,4 +44,3 @@ embedding_model=get_embedding_model()
 DB_FAISS_PATH="vectorstore/db_faiss"
 db=FAISS.from_documents(text_chunks, embedding_model)
 db.save_local(DB_FAISS_PATH)
-
