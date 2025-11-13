@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "app.py", "use": "@vercel/python" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "app.py" }
-  ],
   "functions": {
-    "app.py": {
+    "api/app.py": {
       "maxDuration": 60
     }
   },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/app.py"
+    }
+  ],
   "env": {
     "VERCEL_PYTHON_INSTALLER": "pip"
   }
