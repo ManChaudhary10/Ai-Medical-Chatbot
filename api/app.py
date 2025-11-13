@@ -11,8 +11,14 @@ from vercel_blob import download
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY") 
 
+# --- Define Base Directory ---
+# Get the absolute path of the project's root directory (one level up from 'api')
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# Tell Flask where to find the 'templates' folder
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 # --- Initialize Flask App ---
-app = Flask(__name__)
+app = Flask(__name__, template_folder=TEMPLATE_DIR)
 
 # --- Define Paths (These are just strings, fine at global scope) ---
 TMP_PATH = "/tmp"
@@ -97,7 +103,7 @@ def initialize_app():
 @app.route("/")
 def home():
     """Serve the main chatbot UI"""
-    # This route is lightweight, no initialization needed
+    # This will now correctly find 'index.html' in the root 'templates' folder
     return render_template("index.html")
 
 @app.route("/chat", methods=["POST"])
@@ -122,7 +128,7 @@ def chat():
         return jsonify({"response": "Please ask a question."})
 
     try:
-        retriever = db.as_retriever(search_kwargs={'k': 3})
+        retriever = db.as_rioretriever(search_kwargs={'k': 3})
         docs = retriever.get_relevant_documents(query)
         context = "\n".join([d.page_content for d in docs])
         prompt = f"Context:\n{context}\n\nQuestion:\n{query}"
