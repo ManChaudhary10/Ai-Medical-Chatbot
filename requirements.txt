@@ -6,4 +6,4 @@ langchain-groq
 langchain-huggingface
 faiss-cpu
 sentence-transformers
-gunicorn
+
